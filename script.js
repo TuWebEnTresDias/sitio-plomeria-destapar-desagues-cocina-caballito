@@ -6,6 +6,7 @@
   function closeMenu() {
     if (!toggle || !nav) return;
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Abrir menú');
     nav.classList.remove('is-open');
   }
 
@@ -14,6 +15,8 @@
       var isOpen = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!isOpen));
       nav.classList.toggle('is-open', !isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+      if (!isOpen) nav.querySelector('a').focus();
     });
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeMenu);
